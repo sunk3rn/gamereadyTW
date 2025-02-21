@@ -51,7 +51,7 @@ cachy_scr () {
         sudo pacman-key --lsign-key 3056513887B78AEB
         sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
         sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-        # append chaotic append
+        sudo sed -i -f script.sed /etc/pacman.conf
         sudo pacman -Syu --noconfirm
         sudo pacman -S --needed --noconfirm yay octopi flatpak wine-staging winetricks vkd3d dxvk steam lutris
         sed -i '1 s/^.*$/bit="1"/' bit
