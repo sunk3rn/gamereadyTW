@@ -1,5 +1,5 @@
 incompat="Este não é um OS válido. Abortando."
-cachy="Executando em modo CachyOS."
+cachy="Executando em modo Arch."
 deb="Executando em modo Ubuntu."
 rpm="Executando em modo Fedora."
 yesnvidia="GPU Nvidia detectada. Instalando drivers."

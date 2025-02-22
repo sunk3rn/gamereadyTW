@@ -1,5 +1,5 @@
 incompat="This is not a valid OS for this script. Aborting."
-cachy="Running on CachyOS mode."
+cachy="Running on Arch mode."
 deb="Running on Ubuntu mode."
 rpm="Running on Fedora mode."
 yesnvidia="Nvidia GPU detected. Installing drivers."
