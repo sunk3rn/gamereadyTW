@@ -58,6 +58,10 @@ cachy_scr () {
         echo $reboot
     elif [ $bit == "1" ]; then
         flatpak install -y --or-update --noninteractive com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
+        sed -i '1 s/^.*$/bit="2"/' bit
+        echo $finished
+    elif [ $bit == "2" ]; then
+        echo $again
         sed -i '1 s/^.*$/bit="0"/' bit
         echo $finished
     else
@@ -69,11 +73,14 @@ cachy_scr () {
 ubuntu_scr () {
     source ./bit
     if [ $bit == "0" ]; then
-        sudo apt install -y flatpak wine-staging dxvk vkd3d lutris steam winetricks
+        sudo apt install -y flatpak
+        sudo apt install -y gnome-software gnome-software-plugin-flatpak gnome-software-plugin-snap
+        flatpak flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        flatpak install -y --or-update --noninteractive net.lutris.Lutris com.valvesoftware.Steam com.vysp3r.ProtonPlus com.github.tchx84.Flatseal com.heroicgameslauncher.hgl 
         sed -i '1 s/^.*$/bit="1"/' bit
         echo $reboot
     elif [ $bit == "1" ]; then
-        flatpak install -y --or-update --noninteractive com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
+        echo $again
         sed -i '1 s/^.*$/bit="0"/' bit
         echo $finished
     else
