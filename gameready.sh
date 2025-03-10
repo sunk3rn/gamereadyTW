@@ -76,6 +76,7 @@ fedora_scr () {
 	fi
     sudo dnf in -y wine-staging winetricks dxvk vkd3d lutris steam
     flatpak install -y --or-update --noninteractive com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
+    echo $finished
 }
 cachy_scr () {
     source ./bit
@@ -143,7 +144,6 @@ get_lang
 get_os
 if [ $setting == "fedora" ]; then
     fedora_scr
-    echo $finished
 elif [ $setting == "cachy" ]; then
     cachy_scr
 elif [ $setting == "ubuntu" ]; then
@@ -152,6 +152,7 @@ elif [ $setting == "suse" ]; then
     suse_scr
 else
     echo $incompat
+    sleep 5
     exit 1
 fi
 sleep 5
