@@ -26,6 +26,9 @@ get_os () {
     elif command -v "dnf" &> /dev/null; then
         setting="fedora"
         echo $rpm
+    elif command -v "zypper" &> /dev/null; then
+        setting="suse"
+        echo $suse
     else
         echo $incompat
         sleep 5
@@ -89,6 +92,19 @@ ubuntu_scr () {
         exit 2
     fi
 }
+suse_scr () {
+    GPU=$(lspci | grep -i '.* vga .* nvidia .*')
+	shopt -s nocasematch
+	if [[ $GPU == *' nvidia '* ]]; then
+        echo $yesnvidia
+        sudo zypper install -q -n nvidia-video-G06 nvidia-gl-G06 nvidia-compute-G06 nvidia-compute-utils-G06
+        sudo dracut -f --regenerate-all
+    else
+        echo $nonvidia
+    fi
+    flatpak install --or-update --noninteractive com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
+    echo $finished
+}
 # runtime
 get_lang
 get_os
@@ -99,6 +115,8 @@ elif [ $setting == "cachy" ]; then
     cachy_scr
 elif [ $setting == "ubuntu" ]; then
     ubuntu_scr
+elif [ $setting == "suse" ]; then
+    suse_scr
 else
     echo $incompat
     exit 1
