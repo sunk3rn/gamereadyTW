@@ -97,11 +97,13 @@ suse_scr () {
 	shopt -s nocasematch
 	if [[ $GPU == *' nvidia '* ]]; then
         echo $yesnvidia
-        sudo zypper install -q -n nvidia-video-G06 nvidia-gl-G06 nvidia-compute-G06 nvidia-compute-utils-G06
+        sudo zypper in -q -n nvidia-video-G06 nvidia-gl-G06 nvidia-compute-G06 nvidia-compute-utils-G06
         sudo dracut -f --regenerate-all
     else
         echo $nonvidia
     fi
+    sudo zypper in -n opi
+    sudo opi codecs
     flatpak install --or-update --noninteractive com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
     sudo setsebool -P selinuxuser_execmod 1
     echo $finished
