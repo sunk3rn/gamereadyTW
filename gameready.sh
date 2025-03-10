@@ -103,7 +103,6 @@ suse_scr () {
         echo $nonvidia
     fi
     flatpak install --or-update --noninteractive com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
-    sudo setsebool -P selinuxuser_execmod 1
     echo $finished
 }
 # runtime
