@@ -75,7 +75,7 @@ fedora_scr () {
 		echo $nonvidia
 	fi
     sudo dnf in -y wine-staging winetricks dxvk vkd3d lutris steam
-    flatpak install -y --or-update --noninteractive com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
+    flatpak install -y --or-update --noninteractive --system com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
     echo $finished
 }
 cachy_scr () {
@@ -91,7 +91,7 @@ cachy_scr () {
         sed -i '1 s/^.*$/bit="1"/' bit
         echo $reboot
     elif [ $bit == "1" ]; then
-        flatpak install -y --or-update --noninteractive com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
+        flatpak install -y --or-update --noninteractive --system com.vysp3r.ProtonPlus com.github.tchx84.Flatseal
         sed -i '1 s/^.*$/bit="2"/' bit
         echo $finished
     elif [ $bit == "2" ]; then
@@ -110,7 +110,7 @@ ubuntu_scr () {
         sudo apt install -y flatpak
         sudo apt install -y gnome-software gnome-software-plugin-flatpak gnome-software-plugin-snap
         flatpak flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-        flatpak install -y --or-update --noninteractive net.lutris.Lutris com.valvesoftware.Steam com.vysp3r.ProtonPlus com.github.tchx84.Flatseal com.heroicgameslauncher.hgl 
+        flatpak install -y --or-update --noninteractive --system net.lutris.Lutris com.valvesoftware.Steam com.vysp3r.ProtonPlus com.github.tchx84.Flatseal com.heroicgameslauncher.hgl 
         sed -i '1 s/^.*$/bit="1"/' bit
         echo $reboot
     elif [ $bit == "1" ]; then
@@ -135,7 +135,7 @@ suse_scr () {
     fi
     sudo zypper in -n opi
     sudo opi codecs
-    flatpak install --or-update --noninteractive com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
+    flatpak install -y --or-update --noninteractive --system com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
     sudo setsebool -P selinuxuser_execmod 1
     echo $finished
 }
