@@ -17,23 +17,53 @@ get_lang() {
     fi
 }
 get_os () {
-    if command -v "pacman" &> /dev/null; then
-        setting="cachy"
-        echo $cachy
-    elif command -v "apt" &> /dev/null; then
-        setting="ubuntu"
-        echo $deb
-    elif command -v "dnf" &> /dev/null; then
-        setting="fedora"
-        echo $rpm
-    elif command -v "zypper" &> /dev/null; then
-        setting="suse"
-        echo $suse
-    else
-        echo $incompat
-        sleep 5
-        exit 1
+    . /etc/os-release
+    setting=
+    for id in $ID_LIKE
+    do
+        case "$id" in
+            suse)
+                setting="suse"
+                echo $suse
+                ;;
+            arch)
+                setting="cachy"
+                echo $cachy
+                ;;
+            fedora)
+                setting="fedora"
+                echo $rpm
+                ;;
+            ubuntu)
+                setting="ubuntu"
+                echo $deb
+                ;;
+        esac
+    done
+    if -z "$setting"
+    then
+         echo $incompat
+         sleep 5
+         exit 1
     fi
+# old OS checking - deprecated but left in case of issues with new code
+#    if command -v "pacman" &> /dev/null; then
+#        setting="cachy"
+#        echo $cachy
+#    elif command -v "apt" &> /dev/null; then
+#        setting="ubuntu"
+#        echo $deb
+#    elif command -v "dnf" &> /dev/null; then
+#        setting="fedora"
+#        echo $rpm
+#    elif command -v "zypper" &> /dev/null; then
+#        setting="suse"
+#        echo $suse
+#    else
+#        echo $incompat
+#        sleep 5
+#        exit 1
+#    fi
 }
 fedora_scr () {
     GPU=$(lspci | grep -i '.* vga .* nvidia .*')
