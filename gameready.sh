@@ -128,7 +128,7 @@ suse_scr () {
 	shopt -s nocasematch
 	if [[ $GPU == *' nvidia '* ]]; then
         echo $yesnvidia
-        sudo zypper in -q nvidia-video-G06 nvidia-gl-G06 nvidia-compute-G06 nvidia-compute-utils-G06
+        sudo zypper in -q nvidia-video-G06 nvidia-gl-G06 nvidia-compute-G06 nvidia-compute-utils-G06 nvidia-settings
         sudo dracut -f --regenerate-all
     else
         echo $nonvidia
