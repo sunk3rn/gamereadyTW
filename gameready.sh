@@ -71,6 +71,7 @@ fedora_scr () {
 	if [[ $GPU == *' nvidia '* ]]; then
 		echo $yesnvidia
         sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-power xorg-x11-drv-nvidia-cuda-libs
+        sudo dracut -f --regenerate-all
 	else
 		echo $nonvidia
 	fi
@@ -108,9 +109,9 @@ ubuntu_scr () {
     source ./bit
     if [ $bit == "0" ]; then
         sudo apt install -y flatpak
-        sudo apt install -y gnome-software gnome-software-plugin-flatpak gnome-software-plugin-snap
+        sudo apt install -y gnome-software gnome-software-plugin-flatpak gnome-software-plugin-snap ffmpegthumbnailer ubuntustudio-installer
         flatpak flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-        flatpak install -y --or-update --noninteractive --system net.lutris.Lutris com.valvesoftware.Steam com.vysp3r.ProtonPlus com.github.tchx84.Flatseal com.heroicgameslauncher.hgl 
+        flatpak install -y --or-update --noninteractive --system net.lutris.Lutris com.valvesoftware.Steam com.vysp3r.ProtonPlus com.github.tchx84.Flatseal 
         sed -i '1 s/^.*$/bit="1"/' bit
         echo $reboot
     elif [ $bit == "1" ]; then
