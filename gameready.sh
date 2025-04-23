@@ -12,6 +12,8 @@ get_lang() {
     fi
     if [ $ulang == "pt" ]; then
         source ./langs/lang_pt
+    if [ $ulang == "cs"]; then
+        source ./langs/lang_cs
     else
         source ./langs/lang_en
     fi
@@ -136,7 +138,10 @@ suse_scr () {
     fi
     sudo zypper in -q opi
     sudo opi codecs
-    flatpak install -y --or-update --noninteractive --system com.dec05eba.gpu_screen_recorder com.discordapp.Discord com.github.tchx84.Flatseal com.valvesoftware.Steam net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
+    sudo zypper addrepo https://download.opensuse.org/repositories/openSUSE:Factory:NonFree/standard/openSUSE:Factory:NonFree.repo
+    sudo zypper refresh
+    sudo zypper install steam discord
+    flatpak install -y --or-update --noninteractive --system com.dec05eba.gpu_screen_recorder com.github.tchx84.Flatseal net.lutris.Lutris com.vysp3r.ProtonPlus com.heroicgameslauncher.hgl
     sudo setsebool -P selinuxuser_execmod 1
     echo $finished
 }
